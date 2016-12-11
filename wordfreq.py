@@ -37,13 +37,11 @@ def wordfreq():
     nouns = []
     for sentence in sentences:
         for word,pos in nltk.pos_tag(nltk.word_tokenize(str(sentence))):
-            if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
+            if 'NN' in pos: #(pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS')
                 nouns.append(word)
 
     #lemmatize nouns
-    lem_nouns = []
-    for noun in nouns:
-        lem_nouns.append((nltk.stem.WordNetLemmatizer().lemmatize(noun.lower())))
+    lem_nouns = [nltk.stem.WordNetLemmatizer().lemmatize(noun.lower()) for noun in nouns]
 
     #count lem_nouns
     counts = Counter(lem_nouns)
